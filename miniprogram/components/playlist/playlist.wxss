@@ -1,0 +1,31 @@
+.playlist-container {
+  width: 220rpx;
+  position: relative;
+  padding-bottom: 20rpx;
+}
+.playlist-image {
+  width: 100%;
+  height: 220rpx;
+  border-radius: 6epx;
+}
+.playlist-playcount {
+  font-size: 24rpx;
+  color: #fff;
+  text-shadow: 1px 0 0 rgba(0, 0, 0, 0);
+  position: absolute;
+  right: 10rpx;
+  top: 4rpx;
+  padding-left: 34rpx;
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTcxNjcyNjIxNTM1IiBjbGFzcz0iaWNvbiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjI0NjYiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTg0Ni4xIDUyOC40aC01LjdjLTUuMyAwLTkuNy00LTEwLjItOS4zQzgxMi44IDM1OC45IDY3Ni44IDIzMy42IDUxMiAyMzMuNmMtMTY0LjggMC0zMDAuOCAxMjUuMi0zMTguMSAyODUuNS0wLjYgNS4zLTQuOSA5LjMtMTAuMiA5LjNIMTc4Yy0yNy42IDAtNDkuOSAyMi40LTQ5LjkgNDkuOXYxNjJjMCAyNy42IDIyLjQgNDkuOSA0OS45IDQ5LjloNzguNWMyNy42IDAgNDkuOS0yMi40IDQ5LjktNDkuOXYtMTYyYzAtMjcuNi0yMi40LTQ5LjktNDkuOS00OS45aC0xLjJjLTYuMyAwLTExLjEtNS41LTEwLjItMTEuN0MyNjMuMiAzODUuNiAzNzYgMjg0LjMgNTEyIDI4NC4zczI0OC44IDEwMS4zIDI2Ni45IDIzMi40YzAuOSA2LjItNCAxMS43LTEwLjIgMTEuN2gtMS4yYy0yNy42IDAtNDkuOSAyMi40LTQ5LjkgNDkuOXYxNjJjMCAyNy42IDIyLjQgNDkuOSA0OS45IDQ5LjlIODQ2YzI3LjYgMCA0OS45LTIyLjQgNDkuOS00OS45di0xNjJjMC4xLTI3LjUtMjIuMy00OS45LTQ5LjgtNDkuOXpNMjQ1LjUgNzM5LjdoLTU2LjZjLTUuNyAwLTEwLjMtNC42LTEwLjMtMTAuM1Y1ODkuM2MwLTUuNyA0LjYtMTAuMyAxMC4zLTEwLjNoNTYuNmM1LjcgMCAxMC4zIDQuNiAxMC4zIDEwLjN2MTQwLjFjMCA1LjctNC42IDEwLjMtMTAuMyAxMC4zeiBtNTg5LjYgMGgtNTYuNmMtNS43IDAtMTAuMy00LjYtMTAuMy0xMC4zVjU4OS4zYzAtNS43IDQuNi0xMC4zIDEwLjMtMTAuM2g1Ni42YzUuNyAwIDEwLjMgNC42IDEwLjMgMTAuM3YxNDAuMWMwIDUuNy00LjYgMTAuMy0xMC4zIDEwLjN6IiBwLWlkPSIyNDY3IiBmaWxsPSIjZmZmZmZmIj48L3BhdGg+PC9zdmc+);
+  background-repeat: no-repeat;
+}
+.playlist-name {
+  font-size: 26rpx;
+  line-height: 1.2;
+  padding: 2rpx 0 0 6rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
