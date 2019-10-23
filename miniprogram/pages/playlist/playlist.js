@@ -1,3 +1,4 @@
+import regeneratorRuntime from './../../utils/runtime.js'
 Page({
 
   /**
