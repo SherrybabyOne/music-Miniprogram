@@ -17,4 +17,32 @@
 `import regeneratorRuntime from '../../utils/runtime.js'`
 
 ## 云函数里进行接口调用
-使用**request-promise**库
+使用**request**和**request-promise**npm库
+
+## 小程序云端获取数据库信息
+从数据库中获取数据在云函数端限制为100条，在小程序限制为20条
+突破获取数据条数的限制:
+使用循环多次插入，并将数据库信息与从服务器端信息进行比较去重。
+参考代码:
+```
+// 从数据库取数据
+  // const list = await playlistCollection.get()
+  const countResult = await playlistCollection.count()
+  const total = countResult.total
+  const batchTimes = Math.ceil(total / MAX_LIMIT)
+  const tasks = []
+  for(let i = 0; i < batchTimes; i++) {
+    const promise = playlistCollection.skip(i * MAX_LIMIT).limit(MAX_LIMIT).get()
+    tasks.push(promise)
+  }
+  let list = {
+    data: []
+  }
+  if(tasks.length > 0) {
+    list = (await Promise.all(tasks)).reduce((acc, cur) => {
+      return {
+        data: acc.data.concat(cur.data)
+      }
+    })
+  }
+```
