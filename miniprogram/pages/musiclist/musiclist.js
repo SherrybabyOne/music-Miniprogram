@@ -5,7 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    musiclist: [],
+    listInfo: {},
   },
 
   /**
@@ -20,6 +21,15 @@ Page({
       }
     }).then(res => {
       console.log(res)
+      // const pl = res.result.playlist
+      const { tracks, coverImgUrl, name} = res.result.playlist
+      this.setData({
+        musiclist: tracks,
+        listInfo: {
+          coverImgUrl,
+          name
+        }
+      })
     })
   },
 
