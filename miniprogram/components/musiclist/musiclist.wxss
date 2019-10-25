@@ -26,3 +26,8 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+.playing view , .playing text {
+  color: #d43c33;
+  transition: all .2s ease;
+}
