@@ -2,6 +2,8 @@
 let musiclist = []
 // 正在播放歌曲的index
 let nowPlaying = 0
+// 获取全局背景唯一的背景音频管理器
+const backgroundAudioManager = wx.getBackgroundAudioManager()
 Page({
 
   /**
@@ -17,17 +19,29 @@ Page({
   onLoad: function (options) {
     musiclist = wx.getStorageSync('musiclist')
     nowPlaying = options.index
-    this._loadMusicDetail()
+    this._loadMusicDetail(options.musicId)
   },
-  _loadMusicDetail() {
+  _loadMusicDetail(musicId) {
     let music = musiclist[nowPlaying]
+    console.log(music, 'music')
     wx.setNavigationBarTitle({
       title: music.name,
     })
     this.setData({
       picUrl: music.al.picUrl
     })
-    console.log(music)
+    wx.cloud.callFunction({
+      name: 'music',
+      data: {
+        musicId,
+        $url: 'musicUrl'
+      }
+    }).then(res => {
+      console.log(JSON.parse(res.result))
+      const result = JSON.parse(res.result)
+      backgroundAudioManager.src = result.data[0].url
+      backgroundAudioManager.title = music.name
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
