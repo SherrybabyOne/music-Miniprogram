@@ -1,7 +1,7 @@
 // pages/player/player.js
 let musiclist = []
 // 正在播放歌曲的index
-let nowPlaying = 0
+let nowPlayingIndex = 0
 // 获取全局背景唯一的背景音频管理器
 const backgroundAudioManager = wx.getBackgroundAudioManager()
 Page({
@@ -10,7 +10,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    picUrl: ''
+    picUrl: '',
+    isPlaying: false, //false代表不播放，true代表正在播放
   },
 
   /**
@@ -18,17 +19,22 @@ Page({
    */
   onLoad: function (options) {
     musiclist = wx.getStorageSync('musiclist')
-    nowPlaying = options.index
+    nowPlayingIndex = options.index
     this._loadMusicDetail(options.musicId)
   },
   _loadMusicDetail(musicId) {
-    let music = musiclist[nowPlaying]
+    backgroundAudioManager.stop()
+    let music = musiclist[nowPlayingIndex]
     console.log(music, 'music')
     wx.setNavigationBarTitle({
       title: music.name,
     })
     this.setData({
-      picUrl: music.al.picUrl
+      picUrl: music.al.picUrl,
+      isPlaying: false
+    })
+    wx.showLoading({
+      title: '歌曲加载中',
     })
     wx.cloud.callFunction({
       name: 'music',
@@ -41,7 +47,42 @@ Page({
       const result = JSON.parse(res.result)
       backgroundAudioManager.src = result.data[0].url
       backgroundAudioManager.title = music.name
+      backgroundAudioManager.coverImgUrl = music.al.picUrl
+      backgroundAudioManager.singer = music.ar[0].name
+      backgroundAudioManager.epname = music.al.name
     })
+    this.setData({
+      isPlaying: true
+    })
+    wx.hideLoading()
+  },
+  // 点击暂停/播放触发事件
+  togglePlaying() {
+    // 正在播放
+    if(this.data.isPlaying) {
+      backgroundAudioManager.pause()
+    }else {
+      backgroundAudioManager.play()
+    }
+    this.setData({
+      isPlaying: !this.data.isPlaying
+    })
+  },
+  // 上一首
+  onPrev() {
+    nowPlayingIndex--
+    if(nowPlayingIndex < 0) {
+      nowPlayingIndex = musiclist.length - 1
+    }
+    this._loadMusicDetail(musiclist[nowPlayingIndex].id)
+  },
+  // 下一首
+  onNext() {
+    nowPlayingIndex++
+    if(nowPlayingIndex === musiclist.length - 1) {
+      nowPlayingIndex = 0
+    }
+    this._loadMusicDetail(musiclist[nowPlayingIndex].id)
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
