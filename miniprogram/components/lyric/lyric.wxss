@@ -12,5 +12,5 @@
   min-height: 64rpx;
 }
 .highlight-lyric {
-  
+  color: #d43c33;
 }
