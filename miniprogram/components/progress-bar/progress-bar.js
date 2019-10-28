@@ -43,13 +43,10 @@ Component({
     },
     onTouchEnd() {
       backgroundAudioManager.seek(duration * this.data.progress / 100)
-      console.log(backgroundAudioManager.currentTime)
       const currentTimeFormat = this._dateFormat(Math.floor(backgroundAudioManager.currentTime))
-      console.log(currentTimeFormat, '=========')
       this.setData({
         progress: this.data.progress,
-        movableDis: this.data.movableDis,
-        ['showTime.currentTime']: `${currentTimeFormat.min}:${currentTimeFormat.sec}`
+        movableDis: this.data.movableDis
       })
     },
     _getMovableDis() {
@@ -89,6 +86,7 @@ Component({
         console.log('onTimeUpdate')
         // 当前播放时间
         const currentTime = backgroundAudioManager.currentTime
+        console.log(backgroundAudioManager.currentTime, '=====')
         // 总时间
         const duration = backgroundAudioManager.duration
         // 当前播放时间格式化
