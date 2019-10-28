@@ -2,6 +2,8 @@
 let movableAreaWidth = 0
 let movableViewWidth = 0
 const backgroundAudioManager = wx.getBackgroundAudioManager()
+// 当前秒数
+let currentSec = -1 
 Component({
   /**
    * 组件的属性列表
@@ -31,6 +33,12 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    onChange() {
+      console.log(event)
+    },
+    onTouchEnd() {
+
+    },
     _getMovableDis() {
       // 因为是在组件中，所以用this。如果是在页面中，用wx.
       const query = this.createSelectorQuery()
@@ -39,7 +47,6 @@ Component({
       query.exec((res) => {
         movableAreaWidth = res[0].width
         movableViewWidth = res[1].width
-        console.log(movableAreaWidth, movableViewWidth)
       })
     },
     _bindBgmEvent() {
@@ -67,6 +74,22 @@ Component({
       }),
       backgroundAudioManager.onTimeUpdate(() => {
         console.log('onTimeUpdate')
+        // 当前播放时间
+        const currentTime = backgroundAudioManager.currentTime
+        // 总时间
+        const duration = backgroundAudioManager.duration
+        // 当前播放时间格式化
+        const currentTimeFormat = this._dateFormat(currentTime)
+        // 当前播放时间的秒数取整
+        const sec = currentTime.toString().split('.')[0]
+        if(sec !== currentSec) {
+          this.setData({
+            movableDis: (movableAreaWidth - movableViewWidth) * currentTime / duration,
+            progress: currentTime / duration * 100,
+            ['showTime.currentTime']: `${currentTimeFormat.min}:${currentTimeFormat.sec}`
+          })
+          currentSec = sec
+        }
       }),
       backgroundAudioManager.onEnded(() => {
         console.log('onEnded')
