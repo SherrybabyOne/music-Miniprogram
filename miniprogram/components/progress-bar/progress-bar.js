@@ -3,7 +3,9 @@ let movableAreaWidth = 0
 let movableViewWidth = 0
 const backgroundAudioManager = wx.getBackgroundAudioManager()
 // 当前秒数
-let currentSec = -1 
+let currentSec = -1
+// 当前歌曲总时长,以s为单位
+let duration = 0
 Component({
   /**
    * 组件的属性列表
@@ -33,11 +35,22 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    onChange() {
-      console.log(event)
+    onChange({detail}) {
+      if(detail.source === 'touch') {
+        this.data.progress = detail.x / (movableAreaWidth - movableViewWidth) * 100
+        this.data.movableDis = detail.x
+      }
     },
     onTouchEnd() {
-
+      backgroundAudioManager.seek(duration * this.data.progress / 100)
+      console.log(backgroundAudioManager.currentTime)
+      const currentTimeFormat = this._dateFormat(Math.floor(backgroundAudioManager.currentTime))
+      console.log(currentTimeFormat, '=========')
+      this.setData({
+        progress: this.data.progress,
+        movableDis: this.data.movableDis,
+        ['showTime.currentTime']: `${currentTimeFormat.min}:${currentTimeFormat.sec}`
+      })
     },
     _getMovableDis() {
       // 因为是在组件中，所以用this。如果是在页面中，用wx.
@@ -104,7 +117,7 @@ Component({
     },
     // 设置当前时长
     _setTime() {
-      const duration = backgroundAudioManager.duration
+      duration = backgroundAudioManager.duration
       const durationFormat = this._dateFormat(duration)
       this.setData({
         ['showTime.totalTime']: `${durationFormat.min}:${durationFormat.sec}`
