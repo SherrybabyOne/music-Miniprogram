@@ -7,8 +7,8 @@
     <image class="player-img rotation {{isPlaying?'':'rotation-paused'}}" src="{{ picUrl }}"></image>
   </view>
 
-  <!-- 进度条 -->
-  <x-lyric hidden="{{!isLyricShow}}" />
+  <!-- 歌词 -->
+  <x-lyric isLyricShow="{{!isLyricShow}}" bindtap="onChangeLyricShow" lyric="{{lyric}}" />
 
   <!-- 进度条 -->
   <view class="progress-bar">

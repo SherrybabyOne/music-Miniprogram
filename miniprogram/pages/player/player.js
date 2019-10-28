@@ -12,7 +12,8 @@ Page({
   data: {
     picUrl: '',
     isPlaying: false, //false代表不播放，true代表正在播放
-    isLyricShow: false
+    isLyricShow: false,
+    lyric: ''
   },
 
   /**
@@ -56,6 +57,23 @@ Page({
       isPlaying: true
     })
     wx.hideLoading()
+    // 加载歌词
+    wx.cloud.callFunction({
+      name: 'music',
+      data: {
+        musicId,
+        $url: 'lyric', 
+      }
+    }).then(res => {
+      let lyric = '暂无歌词'
+      const lrc = JSON.parse(res.result).lrc
+      if(lrc) {
+        lyric = lrc.lyric
+      }
+      this.setData({
+        lyric
+      })
+    })
   },
   // 点击暂停/播放触发事件
   togglePlaying() {
@@ -87,7 +105,9 @@ Page({
   },
   // 控制歌词页面的显示
   onChangeLyricShow() {
-    isLyricShow = true
+    this.setData({
+      isLyricShow: !this.data.isLyricShow
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
