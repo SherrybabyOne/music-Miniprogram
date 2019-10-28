@@ -12,6 +12,7 @@ Page({
   data: {
     picUrl: '',
     isPlaying: false, //false代表不播放，true代表正在播放
+    isLyricShow: false
   },
 
   /**
@@ -83,6 +84,10 @@ Page({
       nowPlayingIndex = 0
     }
     this._loadMusicDetail(musiclist[nowPlayingIndex].id)
+  },
+  // 控制歌词页面的显示
+  onChangeLyricShow() {
+    isLyricShow = true
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
