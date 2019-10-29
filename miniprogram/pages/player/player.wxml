@@ -12,7 +12,13 @@
 
   <!-- 进度条 -->
   <view class="progress-bar">
-    <x-progress-bar bindmusicEnd="onNext" bindtimeUpdate="timeUpdate" />
+    <x-progress-bar
+      bindmusicEnd="onNext"
+      bindtimeUpdate="timeUpdate"
+      bindmusicPlay="onPlay"
+      bindmusicPause="onPause"
+      isSame="{{isSame}}"
+    />
   </view>
 
   <!-- 控制面板 -->

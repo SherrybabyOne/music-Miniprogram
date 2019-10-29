@@ -4,6 +4,7 @@ let musiclist = []
 let nowPlayingIndex = 0
 // 获取全局背景唯一的背景音频管理器
 const backgroundAudioManager = wx.getBackgroundAudioManager()
+const app = getApp()
 Page({
 
   /**
@@ -13,7 +14,8 @@ Page({
     picUrl: '',
     isPlaying: false, //false代表不播放，true代表正在播放
     isLyricShow: false,
-    lyric: ''
+    lyric: '',
+    isSame: false, //表示是否为同一首歌
   },
 
   /**
@@ -25,7 +27,18 @@ Page({
     this._loadMusicDetail(options.musicId)
   },
   _loadMusicDetail(musicId) {
-    backgroundAudioManager.stop()
+    if (musicId == app.getPlayingMusicId()){
+      this.setData({
+        isSame: true
+      })
+    }else {
+      this.setData({
+        isSame: false
+      })
+    }
+    if (!this.data.isSame) {
+      backgroundAudioManager.stop()
+    }
     let music = musiclist[nowPlayingIndex]
     console.log(music, 'music')
     wx.setNavigationBarTitle({
@@ -35,6 +48,7 @@ Page({
       picUrl: music.al.picUrl,
       isPlaying: false
     })
+    app.setPlayingMusicId(musicId)
     wx.showLoading({
       title: '歌曲加载中',
     })
@@ -45,13 +59,20 @@ Page({
         $url: 'musicUrl'
       }
     }).then(res => {
-      console.log(JSON.parse(res.result))
       const result = JSON.parse(res.result)
-      backgroundAudioManager.src = result.data[0].url
-      backgroundAudioManager.title = music.name
-      backgroundAudioManager.coverImgUrl = music.al.picUrl
-      backgroundAudioManager.singer = music.ar[0].name
-      backgroundAudioManager.epname = music.al.name
+      if(result.data[0].url === null) {
+        wx.showToast({
+          title: '无权限播放',
+        })
+        return
+      }
+      if(!this.data.isSame) {
+        backgroundAudioManager.src = result.data[0].url
+        backgroundAudioManager.title = music.name
+        backgroundAudioManager.coverImgUrl = music.al.picUrl
+        backgroundAudioManager.singer = music.ar[0].name
+        backgroundAudioManager.epname = music.al.name
+      }
     })
     this.setData({
       isPlaying: true
@@ -111,6 +132,16 @@ Page({
   },
   timeUpdate(event) {
     this.selectComponent('.lyric').update(event.detail.currentTime)
+  },
+  onPlay() {
+    this.setData({
+      isPlaying:true
+    })
+  },
+  onPause() {
+    this.setData({
+      isPlaying: false
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
