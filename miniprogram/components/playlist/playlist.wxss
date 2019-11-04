@@ -6,7 +6,7 @@
 .playlist-image {
   width: 100%;
   height: 220rpx;
-  border-radius: 6epx;
+  border-radius: 6rpx;
 }
 .playlist-playcount {
   font-size: 24rpx;

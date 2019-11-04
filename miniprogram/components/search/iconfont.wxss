@@ -14,27 +14,6 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-.icon-shangyishoushangyige:before {
-  content: "\e78a";
-}
-
-.icon-xiayigexiayishou:before {
-  content: "\e7a5";
-}
-
-.icon-public:before {
-  content: "\e629";
-}
-
-.icon-zanting:before {
-  content: "\e60a";
-}
-
-.icon-bofang:before {
-  content: "\e60e";
-}
-
 .icon-sousuo:before {
   content: "\e612";
 }

@@ -1,0 +1,11 @@
+<view class="container">
+  <!-- 头部 -->
+  <view class="header">
+    <view class="publish-container" bindtap="onPublish">
+      <i class="iconfont icon-public" />
+    </view>
+    <view class="search-container">
+      <x-search iconfont="iconfont" icon-sousuo="icon-sousuo" />
+    </view>
+  </view>
+</view>
