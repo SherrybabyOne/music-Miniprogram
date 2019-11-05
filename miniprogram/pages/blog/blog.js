@@ -9,8 +9,37 @@ Page({
   },
   // 发布功能
   onPublish() {
-    this.setData({
-      modalShow: true
+    // 判断用户是否授权
+    wx.getSetting({
+      success: (res) => {
+        if (res.authSetting['scope.userInfo']) {
+          wx.getUserInfo({
+            success: (res) => {
+              this.onLoginSuccess({
+                detail: res.userInfo
+              })
+            }
+          })
+        }else {
+          this.setData({
+            modalShow: true
+          })
+        }
+      }
+    })
+  },
+  // 授权成功
+  onLoginSuccess(e) {
+    const detail = e.detail
+    wx.navigateTo({
+      url: `/pages/blog-edit/blog-edit?nickName=${detail.nickName}&avatarUrl=${detail.avatarUrl}`,
+    })
+  },
+  // 授权失败
+  onLoginFail() {
+    wx.showModal({
+      title: '授权用户才能发布博客',
+      content: '',
     })
   },
   /**

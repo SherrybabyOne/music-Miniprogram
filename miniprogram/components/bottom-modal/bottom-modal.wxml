@@ -2,7 +2,6 @@
   <view class="panel">
     <i class="iconfont icon-shanchu1" bindtap="onClose" />
     <!-- slot插槽 具名插槽 -->
-    <slot name="slot1"></slot>
-    <slot name="slot2"></slot>
+    <slot name="modal-content" />
   </view>
 </view>
