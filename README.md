@@ -56,5 +56,50 @@
 > 基于 koa 风格的小程序·云开发云函数轻量级类路由库，主要用于优化服务端函数处理逻辑
 
 ## 在组件中引入全局样式class的方法:
+组件有样式隔离，默认不能调用外部的class名称。有三种解决方法:
 - 重新在组件中新建wxss文件写入样式
-- 使用**externalClasses**
+- 使用自定义组件的时候传入class，在组件js文件中使用**externalClasses**,并修改自定义组件引用样式的class(不能重写外部样式)
+- 取消样式隔离
+  ```
+  Component({
+    options: {
+      styleIsolation: 'apply-shared'
+    }
+  })
+  ```
+
+## 组件模版
+在组件模版中提供一个`<slot>`节点，用于承担引用时提供的子节点。
+```
+<!-- 组件模板 -->
+<view class="modal" hidden="{{!modalShow}}">
+  <view class="panel">
+    <i class="iconfont icon-shanchu1" bindtap="onClose" />
+    <!-- slot插槽 具名插槽 -->
+    <slot name="slot1"></slot>
+    <slot name="slot2"></slot>
+  </view>
+</view>
+```
+引用组件的页面模版:
+```
+<x-bottom-modal modalShow="{{modalShow}}" >
+  <view slot="slot2">
+    <view>插槽1</view>
+    <button>按钮</button>
+  </view>
+  <view slot="slot1">插槽2</view>
+</x-bottom-modal>
+```
+需要多个slot时，在组件ks中声明启用:
+```
+Component({
+  options: {
+    multipleSlots: true // 在组件定义时的选项中启用多slot支持
+  },
+  properties: { /* ... */ },
+  methods: { /* ... */ }
+})
+```
+组件的wxml中使用多个slot，用`name`来区分;
+使用时，用`slot`属性来将节点插入到不同的`slot`上。
