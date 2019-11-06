@@ -7,6 +7,46 @@
   box-sizing: border-box;
 }
 
+.image-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20rpx;
+}
+.image-wrap {
+  width: 220rpx;
+  height: 220rpx;
+  margin-right: 10rpx;
+  margin-bottom: 10rpx;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+.image {
+  width: 100%;
+  height: 100%;
+}
+.icon-shanchu1 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40rpx;
+  height: 40rpx;
+  background-color: #000;
+  opacity: 0.4;
+  color: #fff;
+  text-align: center;
+  line-height: 40rpx;
+  font-size: 38rpx;
+  font-weight: bolder;
+}
+.selectphoto {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ border: 1px dashed #8e8e8e;
+}
+
+
 .footer {
   display: flex;
   align-items: center;

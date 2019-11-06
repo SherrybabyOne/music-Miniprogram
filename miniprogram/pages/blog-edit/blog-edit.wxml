@@ -10,9 +10,14 @@
   ></textarea>
   <view class="image-list">
     <!-- 显示图片 -->
-
+    <block wx:for="{{images}}" wx:key="*this">
+      <view class="image-wrap">
+        <image class="image" src="{{item}}" mode="aspectFill" bindtap="onPreviewImage" data-imgsrc="{{item}}" ></image>
+        <i class="iconfont icon-shanchu1" bindtap="onDelImage" data-index="{{index}}" />
+      </view>
+    </block>
     <!-- 选择图片 -->
-    <view class="image-wrap selectphoto">
+    <view class="image-wrap selectphoto" hidden="{{!selectPhoto}}" bindtap="onChooseImage">
       <i class="iconfont icon-jiahao"></i>
     </view>
   </view>
