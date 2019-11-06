@@ -10,6 +10,7 @@
 
 - [云开发文档](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/basis/getting-started.html)
 
+在小程序中，**openid**是用户的唯一标识。
 
 
 ## 在小程序里，如何使用 async/await 语法？

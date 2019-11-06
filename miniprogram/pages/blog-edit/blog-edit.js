@@ -73,6 +73,25 @@ Page({
       current: e.target.dataset.imgsrc
     })
   },
+  // 发布
+  send() {
+    // 上传图片至云存储
+    for(let i = 0, len = this.data.images.length; i < len; i++) {
+      let item = this.data.images[i]
+      // 文件扩展名
+      let suffix = /\.\w+$/.exec(item)[0]
+      wx.cloud.uploadFile({
+        cloudPath: 'blog/' + Date.now() + '-' + Math.random() * 10000 + suffix,
+        filePath: item,
+        success: res => {
+          console.log(res)
+        },
+        fail: err => {
+          console.log(err)
+        }
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
