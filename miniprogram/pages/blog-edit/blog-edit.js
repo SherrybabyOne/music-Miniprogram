@@ -49,7 +49,6 @@ Page({
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
       success: (res) => {
-        console.log(res)
         this.setData({
           images: this.data.images.concat(res.tempFilePaths)
         })
@@ -125,7 +124,6 @@ Page({
           createTime: db.serverDate() //服务端的时间
         }
       }).then(res => {
-        console.log(res)
         wx.hideLoading()
         wx.showToast({
           title: '发布成功',
