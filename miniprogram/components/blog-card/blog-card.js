@@ -27,6 +27,11 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    onPreviewImg(e) {
+      wx.previewImage({
+        urls: e.currentTarget.dataset.imgs,
+        current: e.currentTarget.dataset.imgsrc
+      })
+    }
   }
 })

@@ -92,6 +92,7 @@ Page({
     }
     wx.showLoading({
       title: '等待中',
+      mask: true
     })
     // 上传图片至云存储
     const promiseArr = []
@@ -130,6 +131,10 @@ Page({
         })
         // 返回blog页面,并且刷新
         wx.navigateBack()
+        const pages = getCurrentPages()
+        // 用于取到上一个界面
+        const prevPage = pages[pages.length - 2]
+        prevPage.onPullDownRefresh()
       })
     }).catch(err => {
       wx.hideLoading()
