@@ -1,0 +1,25 @@
+<view class="control">
+  <view class="control-item" bindtap="onComment">
+    <i class="iconfont icon-pinglun icon" />
+    <text>评论</text>
+  </view>
+  <view class="control-item share">
+    <i class="iconfont icon-fenxiang-1 icon" />
+    <text>分享</text>
+  </view>
+</view>
+
+<x-login
+  modalShow="{{loginShow}}"
+  bindloginSuccess="onLoginSuccess"
+  bindloginFail="onLoginFail"
+/>
+
+<x-bottom-modal
+  modalShow="{{modalShow}}"
+>
+  <view slot="modal-content" class="edit-wrap">
+    <textarea name='content' class="commont-content" placeholder="写评论" value="{{content}}" fixed="true"></textarea>
+    <button class="send">发送</button>
+  </view>
+</x-bottom-modal>
