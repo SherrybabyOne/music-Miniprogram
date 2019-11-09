@@ -1,3 +1,4 @@
+let keywords = ''
 Page({
 
   /**
@@ -49,6 +50,13 @@ Page({
   onLoad: function (options) {
     this._loadBlogList()
   },
+  onSearch(e) {
+    this.setData({
+      blogList: []
+    })
+    keywords = e.detail.keywords
+    this._loadBlogList()
+  },
   // 加载博客列表
   _loadBlogList(start = 0) {
     wx.showLoading({
@@ -57,6 +65,7 @@ Page({
     wx.cloud.callFunction({
       name: 'blog',
       data: {
+        keywords,
         start,
         count: 10,
         $url: 'list',
