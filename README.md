@@ -147,4 +147,50 @@ db.serverDate()
 
 ### 数据库插入操作
 - 在小程序端出入数据，会自动添加上用户的**openid**
-- 
+- 在云函数端调用
+
+## 云调用
+云调用是云开发提供的基于云函数使用小程序开放接口的能力，目前覆盖以下使用场景：
+- 服务端调用
+- 开放数据调用
+- 消息推送 
+
+### form表单
+绑定发送表单事件:
+```
+<form slot="modal-content" report-submit="true" bindsubmit="onSend">
+  <view class="edit-wrap">
+    <textarea name='content' class="commont-content" placeholder="写评论" value="{{content}}" fixed="true"></textarea>
+    <button class="send" form-type="submit">发送</button>
+  </view>
+</form>
+```
+在`onSend`中接收**event**:
+- 表单填写内容: `event.detail.value`
+- formId: `event.detail.formId`
+  七天内有效，每次提交生成一个唯一的formId，在模版消息推送中必需
+
+一个模版推送的🌰:
+```
+// 云函数入口函数
+exports.main = async (event, context) => {
+  const { OPENID } = cloud.getWXContext()
+
+  const result = await cloud.openapi.templateMessage.send({
+    touser: OPENID,
+    page: `/pages/blog-comment/blog-comment?blogId=${event.blogId}`,
+    data: {
+      keyword1: {
+        value: event.content
+      },
+      keyword2: {
+        value: '评价完成'
+      }
+    },
+    templateId: 'ri1G-MsNOoyMGVeoPO6bN0sOyjP-kmisguV0qRAtZrY',
+    formId: event.formId
+  })
+  return result
+}
+```
+模版推送在开发者工具中不能测试，需要真机测试

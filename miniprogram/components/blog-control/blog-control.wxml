@@ -18,8 +18,10 @@
 <x-bottom-modal
   modalShow="{{modalShow}}"
 >
-  <view slot="modal-content" class="edit-wrap">
-    <textarea name='content' bindinput="onInput" class="commont-content" placeholder="写评论" value="{{content}}" fixed="true"></textarea>
-    <button class="send" bindtap="onSend">发送</button>
-  </view>
+  <form slot="modal-content" report-submit="true" bindsubmit="onSend">
+    <view class="edit-wrap">
+      <textarea name='content' class="commont-content" placeholder="写评论" value="{{content}}" fixed="true"></textarea>
+      <button class="send" form-type="submit">发送</button>
+    </view>
+  </form>
 </x-bottom-modal>
