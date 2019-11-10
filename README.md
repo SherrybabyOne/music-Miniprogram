@@ -194,3 +194,21 @@ exports.main = async (event, context) => {
 }
 ```
 模版推送在开发者工具中不能测试，需要真机测试
+
+### 分享功能
+微信小程序开发中，分享功能只能使用`button`组件:
+```
+<button open-type="share">
+
+</button> 
+```
+在page页面中有`onShareAppMessage`函数，在这个函数中分享:
+```
+onShareAppMessage: function (e) {
+  let blogObj = e.target.dataset.blog
+  return {
+    title: obj.content,
+    path: `/pages/blog-comment/blog-comment?blogId=${blogObj.blogid}`
+  }
+}
+```
