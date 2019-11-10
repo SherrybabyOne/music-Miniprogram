@@ -83,7 +83,7 @@ Page({
   // 跳转到评论界面
   goComment(e) {
     wx.navigateTo({
-      url: '/pages/blog-comment/blog-comment?id=blogId=' + e.target.dataset.blogid,
+      url: '/pages/blog-comment/blog-comment?blogId=' + e.target.dataset.blogid,
     })
   },
   /**

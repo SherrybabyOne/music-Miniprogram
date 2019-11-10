@@ -1,1 +1,40 @@
-/* miniprogram/pages/blog-comment/blog-comment.wxss */
+.blog-card {
+  padding-bottom: 20rpx;
+}
+.tab {
+  margin-left: 20rpx;
+  font-size: 36rpx;
+  background-color: #fff;
+}
+.comment-list {
+  padding: 20rpx;
+  background-color: #fff;
+}
+.comment-title {
+  border-top: 1px solid rgb(156, 153, 153);
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+}
+.comment-portrait {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+}
+.comment-nickname {
+  margin-left: 16rpx;
+}
+.comment-content {
+  font-size: 32rpx;
+}
+.comment-time {
+  color: #7c7979;
+  font-size: 24rpx;
+}
+.blog-control {
+  background-color: #fff;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  min-height: 80rpx;
+}

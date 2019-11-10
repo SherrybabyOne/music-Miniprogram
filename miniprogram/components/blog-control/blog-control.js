@@ -100,6 +100,8 @@ Component({
           modalShow: false,
           content: ''
         })
+        //向父元素抛出事件，刷新评论
+        this.triggerEvent('refreshCommentList')
       })
 
       // 推送模版消息
