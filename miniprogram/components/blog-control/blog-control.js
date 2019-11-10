@@ -1,11 +1,12 @@
 // components/blog-control/blog-control.js
 let userInfo = {}
+const db = wx.cloud.database()
 Component({
   /**
    * 组件的属性列表
    */
   properties: {
-
+    blogId: String
   },
 
   /**
@@ -48,7 +49,9 @@ Component({
         }
       })
     },
-    onLoginSuccess() {
+    // 登录成功
+    onLoginSuccess(e) {
+      userInfo = e.detail
       // 授权框消失，评论框显示
       this.setData({
         loginShow: false
@@ -58,11 +61,52 @@ Component({
         })
       })
     },
+    // 登录失败
     onLoginFail() {
       wx.showModal({
         title: '授权用户才能进行评论',
         content: '',
       })
+    },
+    onInput(e) {
+      this.setData({
+        content: e.detail.value
+      })
+    },
+    onSend() {
+      // 插入数据库
+      const content = this.data.content
+      if(content.trim() === '') {
+        wx.showModal({
+          title: '评论不能为空',
+          content: '',
+        })
+        return;
+      }
+      wx.showLoading({
+        title: '评价中',
+        mask: true
+      })
+      db.collection('blog-comment').add({
+        data: {
+          content,
+          createTime: db.serverDate(),
+          blogId: this.properties.blogId,
+          nickName: userInfo.nickName,
+          avatarUrl: userInfo.avatarUrl
+        }
+      }).then(res => {
+        wx.hideLoading()
+        wx.showToast({
+          title: '评论成功',
+        })
+        this.setData({
+          modalShow: false,
+          content: ''
+        })
+      })
+
+      // 推送模版消息
     }
   }
 })

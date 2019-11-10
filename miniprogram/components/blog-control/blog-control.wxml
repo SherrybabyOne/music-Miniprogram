@@ -19,7 +19,7 @@
   modalShow="{{modalShow}}"
 >
   <view slot="modal-content" class="edit-wrap">
-    <textarea name='content' class="commont-content" placeholder="写评论" value="{{content}}" fixed="true"></textarea>
-    <button class="send">发送</button>
+    <textarea name='content' bindinput="onInput" class="commont-content" placeholder="写评论" value="{{content}}" fixed="true"></textarea>
+    <button class="send" bindtap="onSend">发送</button>
   </view>
 </x-bottom-modal>
