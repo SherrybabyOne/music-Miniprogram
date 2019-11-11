@@ -63,6 +63,12 @@
 					"pathName": "pages/blog-edit/blog-edit",
 					"query": "nickName=\".\"&avatarUrl= \"https://wx.qlogo.cn/mmopen/vi_32/mJYicLxIRVRlUAEhC7rsbxXLWsMGcRElrzE1075l5LFA2uxS17iacl2bUjbSlNlJtIUrIvq0DJicJUeIKWtqpM0fA/132\"",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "demo",
+					"pathName": "pages/demo/demo",
+					"scene": null
 				}
 			]
 		}

@@ -212,3 +212,30 @@ onShareAppMessage: function (e) {
   }
 }
 ```
+
+
+## 第七章
+
+### 不同方式获取用户信息
+- 使用**open-data**组件展示微信开放的数据(不需要用户授权)，只能看到用户自身的数据
+- `wx.getUserInfo()`，新版本未授权的情况下不再弹窗处理。所以只应该在授权完成的情况下调用这个接口
+-  使用`button`组件(推荐)：
+  ```
+  <!-- html -->
+  <button
+    open-type="getUserInfo"
+    bindgetuserinfo="onGetUserInfo"
+  >获取用户信息</button>
+  <!-- js -->
+  onGetUserInfo(e) {
+    console.log(e)
+  }
+  ```
+
+- 同时获取到用户的openid:
+  - 传统微信登录:
+  ![传统微信登录](http://blog.sherrybaby.club/image/posts/mini_3.jpg)
+  - 云开发微信登录
+  ![云开发微信登录](http://blog.sherrybaby.club/image/posts/mini_4.jpg)
+  使用云函数在用户不授权的情况下就能获取到用户**openId**,用户未授权情况下不能用openId获取到用户的信息
+  
