@@ -7,6 +7,21 @@ Page({
     
   },
 
+  onTapQrCode() {
+    wx.showLoading({
+      title: '生成中',
+    })
+    wx.cloud.callFunction({
+      name: 'getQrCode'
+    }).then(res => {
+      const fileID = res.result
+      wx.previewImage({
+        urls: [fileID],
+        current: fileID
+      })
+      wx.hideLoading()
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
