@@ -1,2 +1,15 @@
-<!--pages/profile-bloghistory/profile-bloghistory.wxml-->
-<text>pages/profile-bloghistory/profile-bloghistory.wxml</text>
+<view>
+  <block wx:for="{{blogList}}" wx:key="_id">
+    <view class="content">
+      <x-blog-card
+        blog="{{item}}"
+        bindtap="goComment"
+        data-blogid="{{item._id}}"
+      />
+      <x-blog-control
+        blogId="{{item._id}}"
+        blog="{{item}}"
+      />
+    </view>
+  </block>
+</view>
