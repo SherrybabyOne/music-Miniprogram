@@ -238,4 +238,13 @@ onShareAppMessage: function (e) {
   - 云开发微信登录
   ![云开发微信登录](http://blog.sherrybaby.club/image/posts/mini_4.jpg)
   使用云函数在用户不授权的情况下就能获取到用户**openId**,用户未授权情况下不能用openId获取到用户的信息
+
+### base64图片
+微信小程序背景图片不支持本地图片，需要使用链接或者base64图片
+
+### 给当前界面设计样式
+```
+page {
   
+}
+```
