@@ -71,6 +71,13 @@
 					"pathName": "pages/demo/demo",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": 5,
+					"name": "pages/profile/profile",
+					"pathName": "pages/profile/profile",
+					"query": "pages/profile/profile",
+					"scene": null
 				}
 			]
 		}
