@@ -272,3 +272,38 @@ checkUpdate() {
 }
 ```
 在`app.js`中调用，每次加载小程序时调用。
+
+## 第八章
+
+### setData
+```
+data: {
+  testObj: {
+    name: 'aihao'
+    age: 34
+  }
+}
+```
+调用`setData`时只希望改变`age`:
+```
+this.setData({
+  ['testObj.age']: 34
+})
+```
+
+### 页面收录sitemap.json的作用与使用方法
+> 微信现已开放小程序内搜索，开发者可以通过 sitemap.json 配置，或者管理后台页面收录开关来配置其小程序页面是否允许微信索引。当开发者允许微信索引时，微信会通过爬虫的形式，为小程序的页面内容建立索引。当用户的搜索词条触发该索引时，小程序的页面将可能展示在搜索结果中。
+
+```
+{
+  "rules":[{
+    "action": "allow",
+    "page": "path/to/page",
+    "params": ["a", "b"],
+    "matching": "exact"
+  }, {
+    "action": "disallow",
+    "page": "path/to/page"
+  }]
+}
+```

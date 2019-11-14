@@ -1,6 +1,8 @@
 //app.js
 App({
-  onLaunch: function () {
+  onLaunch: function (optinos) {
+
+    console.log(optinos, '===')
 
     this.checkUpdate()
     
@@ -24,6 +26,11 @@ App({
       openid: -1
     }
   },
+
+  onShow(options) {
+    console.log(options, '----')
+  },
+
   setPlayingMusicId(musicId) {
     this.globalData.playingMusicId = musicId
   },
